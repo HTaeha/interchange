@@ -1,6 +1,7 @@
 import { StdFee } from "@cosmjs/launchpad";
 import { OfflineSigner, EncodeObject } from "@cosmjs/proto-signing";
 import { Api } from "./rest";
+import { MsgSendBuyOrder } from "./types/myibcdex/tx";
 import { MsgSendCreatePair } from "./types/myibcdex/tx";
 import { MsgSendSellOrder } from "./types/myibcdex/tx";
 export declare const MissingWalletError: Error;
@@ -13,6 +14,7 @@ interface SignAndBroadcastOptions {
 }
 declare const txClient: (wallet: OfflineSigner, { addr: addr }?: TxClientOptions) => Promise<{
     signAndBroadcast: (msgs: EncodeObject[], { fee, memo }?: SignAndBroadcastOptions) => Promise<import("@cosmjs/stargate").BroadcastTxResponse>;
+    msgSendBuyOrder: (data: MsgSendBuyOrder) => EncodeObject;
     msgSendCreatePair: (data: MsgSendCreatePair) => EncodeObject;
     msgSendSellOrder: (data: MsgSendSellOrder) => EncodeObject;
 }>;

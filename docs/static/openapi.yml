@@ -12843,6 +12843,8 @@ definitions:
         type: string
       priceDenom:
         type: string
+  coreators.interchange.myibcdex.MsgSendBuyOrderResponse:
+    type: object
   coreators.interchange.myibcdex.MsgSendCreatePairResponse:
     type: object
   coreators.interchange.myibcdex.MsgSendSellOrderResponse:

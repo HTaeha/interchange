@@ -186,6 +186,25 @@ func (am AppModule) OnRecvPacket(
 				sdk.NewAttribute(types.AttributeKeyAckSuccess, fmt.Sprintf("%t", err != nil)),
 			),
 		)
+	case *types.MyibcdexPacketData_BuyOrderPacket:
+		packetAck, err := am.keeper.OnRecvBuyOrderPacket(ctx, modulePacket, *packet.BuyOrderPacket)
+		if err != nil {
+			ack = channeltypes.NewErrorAcknowledgement(err.Error())
+		} else {
+			// Encode packet acknowledgment
+			packetAckBytes, err := types.ModuleCdc.MarshalJSON(&packetAck)
+			if err != nil {
+				return channeltypes.NewErrorAcknowledgement(sdkerrors.Wrap(sdkerrors.ErrJSONMarshal, err.Error()).Error())
+			}
+			ack = channeltypes.NewResultAcknowledgement(sdk.MustSortJSON(packetAckBytes))
+		}
+		ctx.EventManager().EmitEvent(
+			sdk.NewEvent(
+				types.EventTypeBuyOrderPacket,
+				sdk.NewAttribute(sdk.AttributeKeyModule, types.ModuleName),
+				sdk.NewAttribute(types.AttributeKeyAckSuccess, fmt.Sprintf("%t", err != nil)),
+			),
+		)
 		// this line is used by starport scaffolding # ibc/packet/module/recv
 	default:
 		errMsg := fmt.Sprintf("unrecognized %s packet type: %T", types.ModuleName, packet)
@@ -231,6 +250,12 @@ func (am AppModule) OnAcknowledgementPacket(
 			return nil, err
 		}
 		eventType = types.EventTypeSellOrderPacket
+	case *types.MyibcdexPacketData_BuyOrderPacket:
+		err := am.keeper.OnAcknowledgementBuyOrderPacket(ctx, modulePacket, *packet.BuyOrderPacket, ack)
+		if err != nil {
+			return nil, err
+		}
+		eventType = types.EventTypeBuyOrderPacket
 		// this line is used by starport scaffolding # ibc/packet/module/ack
 	default:
 		errMsg := fmt.Sprintf("unrecognized %s packet type: %T", types.ModuleName, packet)
@@ -287,6 +312,11 @@ func (am AppModule) OnTimeoutPacket(
 		}
 	case *types.MyibcdexPacketData_SellOrderPacket:
 		err := am.keeper.OnTimeoutSellOrderPacket(ctx, modulePacket, *packet.SellOrderPacket)
+		if err != nil {
+			return nil, err
+		}
+	case *types.MyibcdexPacketData_BuyOrderPacket:
+		err := am.keeper.OnTimeoutBuyOrderPacket(ctx, modulePacket, *packet.BuyOrderPacket)
 		if err != nil {
 			return nil, err
 		}

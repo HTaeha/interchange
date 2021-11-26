@@ -15,6 +15,8 @@ export interface MyibcdexBuyOrderBook {
   priceDenom?: string;
 }
 
+export type MyibcdexMsgSendBuyOrderResponse = object;
+
 export type MyibcdexMsgSendCreatePairResponse = object;
 
 export type MyibcdexMsgSendSellOrderResponse = object;
