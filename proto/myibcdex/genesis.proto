@@ -1,12 +1,15 @@
 syntax = "proto3";
 package coreators.interchange.myibcdex;
 
+import "myibcdex/sell_order_book.proto";
 // this line is used by starport scaffolding # genesis/proto/import
+import "gogoproto/gogo.proto";
 
 option go_package = "github.com/coreators/interchange/x/myibcdex/types";
 
 // GenesisState defines the myibcdex module's genesis state.
 message GenesisState {
     string port_id = 1;
+  repeated SellOrderBook sellOrderBookList = 2 [(gogoproto.nullable) = false];
   // this line is used by starport scaffolding # genesis/proto/state
 }

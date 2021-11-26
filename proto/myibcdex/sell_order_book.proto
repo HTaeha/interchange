@@ -1,0 +1,14 @@
+syntax = "proto3";
+package coreators.interchange.myibcdex;
+
+option go_package = "github.com/coreators/interchange/x/myibcdex/types";
+
+
+
+message SellOrderBook {
+  string index = 1; 
+  string amountDenom = 2; 
+  string priceDenom = 3; 
+  
+}
+
