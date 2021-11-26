@@ -4,6 +4,7 @@ package coreators.interchange.myibcdex;
 import "google/api/annotations.proto";
 import "cosmos/base/query/v1beta1/pagination.proto";
 import "myibcdex/sell_order_book.proto";
+import "myibcdex/buy_order_book.proto";
 // this line is used by starport scaffolding # 1
 import "gogoproto/gogo.proto";
 
@@ -19,6 +20,16 @@ service Query {
 	// Queries a list of sellOrderBook items.
 	rpc SellOrderBookAll(QueryAllSellOrderBookRequest) returns (QueryAllSellOrderBookResponse) {
 		option (google.api.http).get = "/coreators/interchange/myibcdex/sellOrderBook";
+	}
+
+// Queries a buyOrderBook by index.
+	rpc BuyOrderBook(QueryGetBuyOrderBookRequest) returns (QueryGetBuyOrderBookResponse) {
+		option (google.api.http).get = "/coreators/interchange/myibcdex/buyOrderBook/{index}";
+	}
+
+	// Queries a list of buyOrderBook items.
+	rpc BuyOrderBookAll(QueryAllBuyOrderBookRequest) returns (QueryAllBuyOrderBookResponse) {
+		option (google.api.http).get = "/coreators/interchange/myibcdex/buyOrderBook";
 	}
 
 // this line is used by starport scaffolding # 2
@@ -39,6 +50,24 @@ message QueryAllSellOrderBookRequest {
 
 message QueryAllSellOrderBookResponse {
 	repeated SellOrderBook sellOrderBook = 1 [(gogoproto.nullable) = false];
+	cosmos.base.query.v1beta1.PageResponse pagination = 2;
+}
+
+message QueryGetBuyOrderBookRequest {
+	  string index = 1;
+
+}
+
+message QueryGetBuyOrderBookResponse {
+	BuyOrderBook buyOrderBook = 1 [(gogoproto.nullable) = false];
+}
+
+message QueryAllBuyOrderBookRequest {
+	cosmos.base.query.v1beta1.PageRequest pagination = 1;
+}
+
+message QueryAllBuyOrderBookResponse {
+	repeated BuyOrderBook buyOrderBook = 1 [(gogoproto.nullable) = false];
 	cosmos.base.query.v1beta1.PageResponse pagination = 2;
 }
 
