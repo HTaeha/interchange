@@ -167,6 +167,25 @@ func (am AppModule) OnRecvPacket(
 				sdk.NewAttribute(types.AttributeKeyAckSuccess, fmt.Sprintf("%t", err != nil)),
 			),
 		)
+	case *types.MyibcdexPacketData_SellOrderPacket:
+		packetAck, err := am.keeper.OnRecvSellOrderPacket(ctx, modulePacket, *packet.SellOrderPacket)
+		if err != nil {
+			ack = channeltypes.NewErrorAcknowledgement(err.Error())
+		} else {
+			// Encode packet acknowledgment
+			packetAckBytes, err := types.ModuleCdc.MarshalJSON(&packetAck)
+			if err != nil {
+				return channeltypes.NewErrorAcknowledgement(sdkerrors.Wrap(sdkerrors.ErrJSONMarshal, err.Error()).Error())
+			}
+			ack = channeltypes.NewResultAcknowledgement(sdk.MustSortJSON(packetAckBytes))
+		}
+		ctx.EventManager().EmitEvent(
+			sdk.NewEvent(
+				types.EventTypeSellOrderPacket,
+				sdk.NewAttribute(sdk.AttributeKeyModule, types.ModuleName),
+				sdk.NewAttribute(types.AttributeKeyAckSuccess, fmt.Sprintf("%t", err != nil)),
+			),
+		)
 		// this line is used by starport scaffolding # ibc/packet/module/recv
 	default:
 		errMsg := fmt.Sprintf("unrecognized %s packet type: %T", types.ModuleName, packet)
@@ -206,6 +225,12 @@ func (am AppModule) OnAcknowledgementPacket(
 			return nil, err
 		}
 		eventType = types.EventTypeCreatePairPacket
+	case *types.MyibcdexPacketData_SellOrderPacket:
+		err := am.keeper.OnAcknowledgementSellOrderPacket(ctx, modulePacket, *packet.SellOrderPacket, ack)
+		if err != nil {
+			return nil, err
+		}
+		eventType = types.EventTypeSellOrderPacket
 		// this line is used by starport scaffolding # ibc/packet/module/ack
 	default:
 		errMsg := fmt.Sprintf("unrecognized %s packet type: %T", types.ModuleName, packet)
@@ -257,6 +282,11 @@ func (am AppModule) OnTimeoutPacket(
 	switch packet := modulePacketData.Packet.(type) {
 	case *types.MyibcdexPacketData_CreatePairPacket:
 		err := am.keeper.OnTimeoutCreatePairPacket(ctx, modulePacket, *packet.CreatePairPacket)
+		if err != nil {
+			return nil, err
+		}
+	case *types.MyibcdexPacketData_SellOrderPacket:
+		err := am.keeper.OnTimeoutSellOrderPacket(ctx, modulePacket, *packet.SellOrderPacket)
 		if err != nil {
 			return nil, err
 		}

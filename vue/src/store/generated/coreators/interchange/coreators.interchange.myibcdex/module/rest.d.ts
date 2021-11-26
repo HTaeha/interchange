@@ -4,6 +4,7 @@ export interface MyibcdexBuyOrderBook {
     priceDenom?: string;
 }
 export declare type MyibcdexMsgSendCreatePairResponse = object;
+export declare type MyibcdexMsgSendSellOrderResponse = object;
 export interface MyibcdexQueryAllBuyOrderBookResponse {
     buyOrderBook?: MyibcdexBuyOrderBook[];
     /**

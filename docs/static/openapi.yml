@@ -12845,6 +12845,8 @@ definitions:
         type: string
   coreators.interchange.myibcdex.MsgSendCreatePairResponse:
     type: object
+  coreators.interchange.myibcdex.MsgSendSellOrderResponse:
+    type: object
   coreators.interchange.myibcdex.QueryAllBuyOrderBookResponse:
     type: object
     properties:

@@ -17,6 +17,8 @@ export interface MyibcdexBuyOrderBook {
 
 export type MyibcdexMsgSendCreatePairResponse = object;
 
+export type MyibcdexMsgSendSellOrderResponse = object;
+
 export interface MyibcdexQueryAllBuyOrderBookResponse {
   buyOrderBook?: MyibcdexBuyOrderBook[];
 

@@ -3,6 +3,8 @@ export declare const protobufPackage = "coreators.interchange.myibcdex";
 export interface MyibcdexPacketData {
     noData: NoData | undefined;
     /** this line is used by starport scaffolding # ibc/packet/proto/field */
+    sellOrderPacket: SellOrderPacketData | undefined;
+    /** this line is used by starport scaffolding # ibc/packet/proto/field/number */
     createPairPacket: CreatePairPacketData | undefined;
 }
 export interface NoData {
@@ -14,6 +16,18 @@ export interface CreatePairPacketData {
 }
 /** CreatePairPacketAck defines a struct for the packet acknowledgment */
 export interface CreatePairPacketAck {
+}
+/** SellOrderPacketData defines a struct for the packet payload */
+export interface SellOrderPacketData {
+    amountDenom: string;
+    amount: number;
+    priceDenom: string;
+    price: number;
+}
+/** SellOrderPacketAck defines a struct for the packet acknowledgment */
+export interface SellOrderPacketAck {
+    remainingAmount: number;
+    gain: number;
 }
 export declare const MyibcdexPacketData: {
     encode(message: MyibcdexPacketData, writer?: Writer): Writer;
@@ -42,6 +56,20 @@ export declare const CreatePairPacketAck: {
     fromJSON(_: any): CreatePairPacketAck;
     toJSON(_: CreatePairPacketAck): unknown;
     fromPartial(_: DeepPartial<CreatePairPacketAck>): CreatePairPacketAck;
+};
+export declare const SellOrderPacketData: {
+    encode(message: SellOrderPacketData, writer?: Writer): Writer;
+    decode(input: Reader | Uint8Array, length?: number): SellOrderPacketData;
+    fromJSON(object: any): SellOrderPacketData;
+    toJSON(message: SellOrderPacketData): unknown;
+    fromPartial(object: DeepPartial<SellOrderPacketData>): SellOrderPacketData;
+};
+export declare const SellOrderPacketAck: {
+    encode(message: SellOrderPacketAck, writer?: Writer): Writer;
+    decode(input: Reader | Uint8Array, length?: number): SellOrderPacketAck;
+    fromJSON(object: any): SellOrderPacketAck;
+    toJSON(message: SellOrderPacketAck): unknown;
+    fromPartial(object: DeepPartial<SellOrderPacketAck>): SellOrderPacketAck;
 };
 declare type Builtin = Date | Function | Uint8Array | string | number | undefined;
 export declare type DeepPartial<T> = T extends Builtin ? T : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? {
