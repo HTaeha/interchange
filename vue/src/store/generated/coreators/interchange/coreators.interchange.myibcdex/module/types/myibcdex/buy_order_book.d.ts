@@ -1,9 +1,12 @@
+import { OrderBook } from "../myibcdex/order";
 import { Writer, Reader } from "protobufjs/minimal";
 export declare const protobufPackage = "coreators.interchange.myibcdex";
 export interface BuyOrderBook {
+    creator: string;
     index: string;
     amountDenom: string;
     priceDenom: string;
+    book: OrderBook | undefined;
 }
 export declare const BuyOrderBook: {
     encode(message: BuyOrderBook, writer?: Writer): Writer;

@@ -1,7 +1,9 @@
 export interface MyibcdexBuyOrderBook {
+    creator?: string;
     index?: string;
     amountDenom?: string;
     priceDenom?: string;
+    book?: MyibcdexOrderBook;
 }
 export interface MyibcdexDenomTrace {
     index?: string;
@@ -14,6 +16,20 @@ export declare type MyibcdexMsgCancelSellOrderResponse = object;
 export declare type MyibcdexMsgSendBuyOrderResponse = object;
 export declare type MyibcdexMsgSendCreatePairResponse = object;
 export declare type MyibcdexMsgSendSellOrderResponse = object;
+export interface MyibcdexOrder {
+    /** @format int32 */
+    id?: number;
+    creator?: string;
+    /** @format int32 */
+    amount?: number;
+    /** @format int32 */
+    price?: number;
+}
+export interface MyibcdexOrderBook {
+    /** @format int32 */
+    idCount?: number;
+    orders?: MyibcdexOrder[];
+}
 export interface MyibcdexQueryAllBuyOrderBookResponse {
     buyOrderBook?: MyibcdexBuyOrderBook[];
     /**
@@ -63,9 +79,11 @@ export interface MyibcdexQueryGetSellOrderBookResponse {
     sellOrderBook?: MyibcdexSellOrderBook;
 }
 export interface MyibcdexSellOrderBook {
+    creator?: string;
     index?: string;
     amountDenom?: string;
     priceDenom?: string;
+    book?: MyibcdexOrderBook;
 }
 export interface ProtobufAny {
     "@type"?: string;

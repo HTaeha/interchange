@@ -23,9 +23,11 @@ var _ = math.Inf
 const _ = proto.GoGoProtoPackageIsVersion3 // please upgrade the proto package
 
 type BuyOrderBook struct {
-	Index       string `protobuf:"bytes,1,opt,name=index,proto3" json:"index,omitempty"`
-	AmountDenom string `protobuf:"bytes,2,opt,name=amountDenom,proto3" json:"amountDenom,omitempty"`
-	PriceDenom  string `protobuf:"bytes,3,opt,name=priceDenom,proto3" json:"priceDenom,omitempty"`
+	Creator     string     `protobuf:"bytes,1,opt,name=creator,proto3" json:"creator,omitempty"`
+	Index       string     `protobuf:"bytes,2,opt,name=index,proto3" json:"index,omitempty"`
+	AmountDenom string     `protobuf:"bytes,3,opt,name=amountDenom,proto3" json:"amountDenom,omitempty"`
+	PriceDenom  string     `protobuf:"bytes,4,opt,name=priceDenom,proto3" json:"priceDenom,omitempty"`
+	Book        *OrderBook `protobuf:"bytes,5,opt,name=book,proto3" json:"book,omitempty"`
 }
 
 func (m *BuyOrderBook) Reset()         { *m = BuyOrderBook{} }
@@ -61,6 +63,13 @@ func (m *BuyOrderBook) XXX_DiscardUnknown() {
 
 var xxx_messageInfo_BuyOrderBook proto.InternalMessageInfo
 
+func (m *BuyOrderBook) GetCreator() string {
+	if m != nil {
+		return m.Creator
+	}
+	return ""
+}
+
 func (m *BuyOrderBook) GetIndex() string {
 	if m != nil {
 		return m.Index
@@ -82,6 +91,13 @@ func (m *BuyOrderBook) GetPriceDenom() string {
 	return ""
 }
 
+func (m *BuyOrderBook) GetBook() *OrderBook {
+	if m != nil {
+		return m.Book
+	}
+	return nil
+}
+
 func init() {
 	proto.RegisterType((*BuyOrderBook)(nil), "coreators.interchange.myibcdex.BuyOrderBook")
 }
@@ -89,21 +105,24 @@ func init() {
 func init() { proto.RegisterFile("myibcdex/buy_order_book.proto", fileDescriptor_c541468e472d5382) }
 
 var fileDescriptor_c541468e472d5382 = []byte{
-	// 211 bytes of a gzipped FileDescriptorProto
+	// 257 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xe2, 0x92, 0xcd, 0xad, 0xcc, 0x4c,
 	0x4a, 0x4e, 0x49, 0xad, 0xd0, 0x4f, 0x2a, 0xad, 0x8c, 0xcf, 0x2f, 0x4a, 0x49, 0x2d, 0x8a, 0x4f,
 	0xca, 0xcf, 0xcf, 0xd6, 0x2b, 0x28, 0xca, 0x2f, 0xc9, 0x17, 0x92, 0x4b, 0xce, 0x2f, 0x4a, 0x4d,
 	0x2c, 0xc9, 0x2f, 0x2a, 0xd6, 0xcb, 0xcc, 0x2b, 0x49, 0x2d, 0x4a, 0xce, 0x48, 0xcc, 0x4b, 0x4f,
-	0xd5, 0x83, 0x69, 0x52, 0x4a, 0xe3, 0xe2, 0x71, 0x2a, 0xad, 0xf4, 0x07, 0x69, 0x73, 0xca, 0xcf,
-	0xcf, 0x16, 0x12, 0xe1, 0x62, 0xcd, 0xcc, 0x4b, 0x49, 0xad, 0x90, 0x60, 0x54, 0x60, 0xd4, 0xe0,
-	0x0c, 0x82, 0x70, 0x84, 0x14, 0xb8, 0xb8, 0x13, 0x73, 0xf3, 0x4b, 0xf3, 0x4a, 0x5c, 0x52, 0xf3,
-	0xf2, 0x73, 0x25, 0x98, 0xc0, 0x72, 0xc8, 0x42, 0x42, 0x72, 0x5c, 0x5c, 0x05, 0x45, 0x99, 0xc9,
-	0xa9, 0x10, 0x05, 0xcc, 0x60, 0x05, 0x48, 0x22, 0x4e, 0xde, 0x27, 0x1e, 0xc9, 0x31, 0x5e, 0x78,
-	0x24, 0xc7, 0xf8, 0xe0, 0x91, 0x1c, 0xe3, 0x84, 0xc7, 0x72, 0x0c, 0x17, 0x1e, 0xcb, 0x31, 0xdc,
-	0x78, 0x2c, 0xc7, 0x10, 0x65, 0x98, 0x9e, 0x59, 0x92, 0x51, 0x9a, 0xa4, 0x97, 0x9c, 0x9f, 0xab,
-	0x0f, 0x77, 0xac, 0x3e, 0x92, 0x63, 0xf5, 0x2b, 0xf4, 0xe1, 0x7e, 0x2c, 0xa9, 0x2c, 0x48, 0x2d,
-	0x4e, 0x62, 0x03, 0xfb, 0xcd, 0x18, 0x10, 0x00, 0x00, 0xff, 0xff, 0xc3, 0xee, 0x7b, 0x0a, 0xfc,
-	0x00, 0x00, 0x00,
+	0xd5, 0x83, 0x69, 0x92, 0x12, 0x81, 0x6b, 0x07, 0x6b, 0x85, 0xe8, 0x52, 0xda, 0xcf, 0xc8, 0xc5,
+	0xe3, 0x54, 0x5a, 0xe9, 0x0f, 0x12, 0x72, 0xca, 0xcf, 0xcf, 0x16, 0x92, 0xe0, 0x62, 0x4f, 0x86,
+	0x98, 0x23, 0xc1, 0xa8, 0xc0, 0xa8, 0xc1, 0x19, 0x04, 0xe3, 0x0a, 0x89, 0x70, 0xb1, 0x66, 0xe6,
+	0xa5, 0xa4, 0x56, 0x48, 0x30, 0x81, 0xc5, 0x21, 0x1c, 0x21, 0x05, 0x2e, 0xee, 0xc4, 0xdc, 0xfc,
+	0xd2, 0xbc, 0x12, 0x97, 0xd4, 0xbc, 0xfc, 0x5c, 0x09, 0x66, 0xb0, 0x1c, 0xb2, 0x90, 0x90, 0x1c,
+	0x17, 0x57, 0x41, 0x51, 0x66, 0x72, 0x2a, 0x44, 0x01, 0x0b, 0x58, 0x01, 0x92, 0x88, 0x90, 0x2d,
+	0x17, 0x0b, 0xc8, 0x1b, 0x12, 0xac, 0x0a, 0x8c, 0x1a, 0xdc, 0x46, 0x9a, 0x7a, 0xf8, 0xfd, 0xa1,
+	0x07, 0x77, 0x6a, 0x10, 0x58, 0x9b, 0x93, 0xf7, 0x89, 0x47, 0x72, 0x8c, 0x17, 0x1e, 0xc9, 0x31,
+	0x3e, 0x78, 0x24, 0xc7, 0x38, 0xe1, 0xb1, 0x1c, 0xc3, 0x85, 0xc7, 0x72, 0x0c, 0x37, 0x1e, 0xcb,
+	0x31, 0x44, 0x19, 0xa6, 0x67, 0x96, 0x64, 0x94, 0x26, 0xe9, 0x25, 0xe7, 0xe7, 0xea, 0xc3, 0x0d,
+	0xd5, 0x47, 0x32, 0x54, 0xbf, 0x42, 0x1f, 0x1e, 0x28, 0x25, 0x95, 0x05, 0xa9, 0xc5, 0x49, 0x6c,
+	0xe0, 0x50, 0x31, 0x06, 0x04, 0x00, 0x00, 0xff, 0xff, 0x81, 0x88, 0xf8, 0x8e, 0x6c, 0x01, 0x00,
+	0x00,
 }
 
 func (m *BuyOrderBook) Marshal() (dAtA []byte, err error) {
@@ -126,24 +145,43 @@ func (m *BuyOrderBook) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	_ = i
 	var l int
 	_ = l
+	if m.Book != nil {
+		{
+			size, err := m.Book.MarshalToSizedBuffer(dAtA[:i])
+			if err != nil {
+				return 0, err
+			}
+			i -= size
+			i = encodeVarintBuyOrderBook(dAtA, i, uint64(size))
+		}
+		i--
+		dAtA[i] = 0x2a
+	}
 	if len(m.PriceDenom) > 0 {
 		i -= len(m.PriceDenom)
 		copy(dAtA[i:], m.PriceDenom)
 		i = encodeVarintBuyOrderBook(dAtA, i, uint64(len(m.PriceDenom)))
 		i--
-		dAtA[i] = 0x1a
+		dAtA[i] = 0x22
 	}
 	if len(m.AmountDenom) > 0 {
 		i -= len(m.AmountDenom)
 		copy(dAtA[i:], m.AmountDenom)
 		i = encodeVarintBuyOrderBook(dAtA, i, uint64(len(m.AmountDenom)))
 		i--
-		dAtA[i] = 0x12
+		dAtA[i] = 0x1a
 	}
 	if len(m.Index) > 0 {
 		i -= len(m.Index)
 		copy(dAtA[i:], m.Index)
 		i = encodeVarintBuyOrderBook(dAtA, i, uint64(len(m.Index)))
+		i--
+		dAtA[i] = 0x12
+	}
+	if len(m.Creator) > 0 {
+		i -= len(m.Creator)
+		copy(dAtA[i:], m.Creator)
+		i = encodeVarintBuyOrderBook(dAtA, i, uint64(len(m.Creator)))
 		i--
 		dAtA[i] = 0xa
 	}
@@ -167,6 +205,10 @@ func (m *BuyOrderBook) Size() (n int) {
 	}
 	var l int
 	_ = l
+	l = len(m.Creator)
+	if l > 0 {
+		n += 1 + l + sovBuyOrderBook(uint64(l))
+	}
 	l = len(m.Index)
 	if l > 0 {
 		n += 1 + l + sovBuyOrderBook(uint64(l))
@@ -177,6 +219,10 @@ func (m *BuyOrderBook) Size() (n int) {
 	}
 	l = len(m.PriceDenom)
 	if l > 0 {
+		n += 1 + l + sovBuyOrderBook(uint64(l))
+	}
+	if m.Book != nil {
+		l = m.Book.Size()
 		n += 1 + l + sovBuyOrderBook(uint64(l))
 	}
 	return n
@@ -219,6 +265,38 @@ func (m *BuyOrderBook) Unmarshal(dAtA []byte) error {
 		switch fieldNum {
 		case 1:
 			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Creator", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowBuyOrderBook
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthBuyOrderBook
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthBuyOrderBook
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Creator = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 2:
+			if wireType != 2 {
 				return fmt.Errorf("proto: wrong wireType = %d for field Index", wireType)
 			}
 			var stringLen uint64
@@ -249,7 +327,7 @@ func (m *BuyOrderBook) Unmarshal(dAtA []byte) error {
 			}
 			m.Index = string(dAtA[iNdEx:postIndex])
 			iNdEx = postIndex
-		case 2:
+		case 3:
 			if wireType != 2 {
 				return fmt.Errorf("proto: wrong wireType = %d for field AmountDenom", wireType)
 			}
@@ -281,7 +359,7 @@ func (m *BuyOrderBook) Unmarshal(dAtA []byte) error {
 			}
 			m.AmountDenom = string(dAtA[iNdEx:postIndex])
 			iNdEx = postIndex
-		case 3:
+		case 4:
 			if wireType != 2 {
 				return fmt.Errorf("proto: wrong wireType = %d for field PriceDenom", wireType)
 			}
@@ -312,6 +390,42 @@ func (m *BuyOrderBook) Unmarshal(dAtA []byte) error {
 				return io.ErrUnexpectedEOF
 			}
 			m.PriceDenom = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 5:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Book", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowBuyOrderBook
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthBuyOrderBook
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthBuyOrderBook
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if m.Book == nil {
+				m.Book = &OrderBook{}
+			}
+			if err := m.Book.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
 			iNdEx = postIndex
 		default:
 			iNdEx = preIndex

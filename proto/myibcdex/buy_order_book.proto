@@ -3,12 +3,15 @@ package coreators.interchange.myibcdex;
 
 option go_package = "github.com/coreators/interchange/x/myibcdex/types";
 
+import "myibcdex/order.proto";
 
 
 message BuyOrderBook {
-  string index = 1; 
-  string amountDenom = 2; 
-  string priceDenom = 3; 
+  string creator = 1;
+  string index = 2; 
+  string amountDenom = 3; 
+  string priceDenom = 4; 
+  OrderBook book = 5;
   
 }
 

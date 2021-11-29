@@ -19,12 +19,36 @@ paths:
                 items:
                   type: object
                   properties:
+                    creator:
+                      type: string
                     index:
                       type: string
                     amountDenom:
                       type: string
                     priceDenom:
                       type: string
+                    book:
+                      type: object
+                      properties:
+                        idCount:
+                          type: integer
+                          format: int32
+                        orders:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              id:
+                                type: integer
+                                format: int32
+                              creator:
+                                type: string
+                              amount:
+                                type: integer
+                                format: int32
+                              price:
+                                type: integer
+                                format: int32
               pagination:
                 type: object
                 properties:
@@ -139,12 +163,36 @@ paths:
               buyOrderBook:
                 type: object
                 properties:
+                  creator:
+                    type: string
                   index:
                     type: string
                   amountDenom:
                     type: string
                   priceDenom:
                     type: string
+                  book:
+                    type: object
+                    properties:
+                      idCount:
+                        type: integer
+                        format: int32
+                      orders:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            id:
+                              type: integer
+                              format: int32
+                            creator:
+                              type: string
+                            amount:
+                              type: integer
+                              format: int32
+                            price:
+                              type: integer
+                              format: int32
         default:
           description: An unexpected error response.
           schema:
@@ -355,12 +403,36 @@ paths:
                 items:
                   type: object
                   properties:
+                    creator:
+                      type: string
                     index:
                       type: string
                     amountDenom:
                       type: string
                     priceDenom:
                       type: string
+                    book:
+                      type: object
+                      properties:
+                        idCount:
+                          type: integer
+                          format: int32
+                        orders:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              id:
+                                type: integer
+                                format: int32
+                              creator:
+                                type: string
+                              amount:
+                                type: integer
+                                format: int32
+                              price:
+                                type: integer
+                                format: int32
               pagination:
                 type: object
                 properties:
@@ -475,12 +547,36 @@ paths:
               sellOrderBook:
                 type: object
                 properties:
+                  creator:
+                    type: string
                   index:
                     type: string
                   amountDenom:
                     type: string
                   priceDenom:
                     type: string
+                  book:
+                    type: object
+                    properties:
+                      idCount:
+                        type: integer
+                        format: int32
+                      orders:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            id:
+                              type: integer
+                              format: int32
+                            creator:
+                              type: string
+                            amount:
+                              type: integer
+                              format: int32
+                            price:
+                              type: integer
+                              format: int32
         default:
           description: An unexpected error response.
           schema:
@@ -13007,12 +13103,36 @@ definitions:
   coreators.interchange.myibcdex.BuyOrderBook:
     type: object
     properties:
+      creator:
+        type: string
       index:
         type: string
       amountDenom:
         type: string
       priceDenom:
         type: string
+      book:
+        type: object
+        properties:
+          idCount:
+            type: integer
+            format: int32
+          orders:
+            type: array
+            items:
+              type: object
+              properties:
+                id:
+                  type: integer
+                  format: int32
+                creator:
+                  type: string
+                amount:
+                  type: integer
+                  format: int32
+                price:
+                  type: integer
+                  format: int32
   coreators.interchange.myibcdex.DenomTrace:
     type: object
     properties:
@@ -13034,6 +13154,42 @@ definitions:
     type: object
   coreators.interchange.myibcdex.MsgSendSellOrderResponse:
     type: object
+  coreators.interchange.myibcdex.Order:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int32
+      creator:
+        type: string
+      amount:
+        type: integer
+        format: int32
+      price:
+        type: integer
+        format: int32
+  coreators.interchange.myibcdex.OrderBook:
+    type: object
+    properties:
+      idCount:
+        type: integer
+        format: int32
+      orders:
+        type: array
+        items:
+          type: object
+          properties:
+            id:
+              type: integer
+              format: int32
+            creator:
+              type: string
+            amount:
+              type: integer
+              format: int32
+            price:
+              type: integer
+              format: int32
   coreators.interchange.myibcdex.QueryAllBuyOrderBookResponse:
     type: object
     properties:
@@ -13042,12 +13198,36 @@ definitions:
         items:
           type: object
           properties:
+            creator:
+              type: string
             index:
               type: string
             amountDenom:
               type: string
             priceDenom:
               type: string
+            book:
+              type: object
+              properties:
+                idCount:
+                  type: integer
+                  format: int32
+                orders:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        format: int32
+                      creator:
+                        type: string
+                      amount:
+                        type: integer
+                        format: int32
+                      price:
+                        type: integer
+                        format: int32
       pagination:
         type: object
         properties:
@@ -13122,12 +13302,36 @@ definitions:
         items:
           type: object
           properties:
+            creator:
+              type: string
             index:
               type: string
             amountDenom:
               type: string
             priceDenom:
               type: string
+            book:
+              type: object
+              properties:
+                idCount:
+                  type: integer
+                  format: int32
+                orders:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        format: int32
+                      creator:
+                        type: string
+                      amount:
+                        type: integer
+                        format: int32
+                      price:
+                        type: integer
+                        format: int32
       pagination:
         type: object
         properties:
@@ -13159,12 +13363,36 @@ definitions:
       buyOrderBook:
         type: object
         properties:
+          creator:
+            type: string
           index:
             type: string
           amountDenom:
             type: string
           priceDenom:
             type: string
+          book:
+            type: object
+            properties:
+              idCount:
+                type: integer
+                format: int32
+              orders:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                      format: int32
+                    creator:
+                      type: string
+                    amount:
+                      type: integer
+                      format: int32
+                    price:
+                      type: integer
+                      format: int32
   coreators.interchange.myibcdex.QueryGetDenomTraceResponse:
     type: object
     properties:
@@ -13185,21 +13413,69 @@ definitions:
       sellOrderBook:
         type: object
         properties:
+          creator:
+            type: string
           index:
             type: string
           amountDenom:
             type: string
           priceDenom:
             type: string
+          book:
+            type: object
+            properties:
+              idCount:
+                type: integer
+                format: int32
+              orders:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                      format: int32
+                    creator:
+                      type: string
+                    amount:
+                      type: integer
+                      format: int32
+                    price:
+                      type: integer
+                      format: int32
   coreators.interchange.myibcdex.SellOrderBook:
     type: object
     properties:
+      creator:
+        type: string
       index:
         type: string
       amountDenom:
         type: string
       priceDenom:
         type: string
+      book:
+        type: object
+        properties:
+          idCount:
+            type: integer
+            format: int32
+          orders:
+            type: array
+            items:
+              type: object
+              properties:
+                id:
+                  type: integer
+                  format: int32
+                creator:
+                  type: string
+                amount:
+                  type: integer
+                  format: int32
+                price:
+                  type: integer
+                  format: int32
   cosmos.base.query.v1beta1.PageRequest:
     type: object
     properties:
