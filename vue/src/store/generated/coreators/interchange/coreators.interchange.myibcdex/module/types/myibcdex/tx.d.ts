@@ -34,6 +34,16 @@ export interface MsgSendBuyOrder {
 }
 export interface MsgSendBuyOrderResponse {
 }
+export interface MsgCancelSellOrder {
+    creator: string;
+    port: string;
+    channel: string;
+    amountDenom: string;
+    priceDenom: string;
+    orderID: number;
+}
+export interface MsgCancelSellOrderResponse {
+}
 export declare const MsgSendCreatePair: {
     encode(message: MsgSendCreatePair, writer?: Writer): Writer;
     decode(input: Reader | Uint8Array, length?: number): MsgSendCreatePair;
@@ -76,12 +86,27 @@ export declare const MsgSendBuyOrderResponse: {
     toJSON(_: MsgSendBuyOrderResponse): unknown;
     fromPartial(_: DeepPartial<MsgSendBuyOrderResponse>): MsgSendBuyOrderResponse;
 };
+export declare const MsgCancelSellOrder: {
+    encode(message: MsgCancelSellOrder, writer?: Writer): Writer;
+    decode(input: Reader | Uint8Array, length?: number): MsgCancelSellOrder;
+    fromJSON(object: any): MsgCancelSellOrder;
+    toJSON(message: MsgCancelSellOrder): unknown;
+    fromPartial(object: DeepPartial<MsgCancelSellOrder>): MsgCancelSellOrder;
+};
+export declare const MsgCancelSellOrderResponse: {
+    encode(_: MsgCancelSellOrderResponse, writer?: Writer): Writer;
+    decode(input: Reader | Uint8Array, length?: number): MsgCancelSellOrderResponse;
+    fromJSON(_: any): MsgCancelSellOrderResponse;
+    toJSON(_: MsgCancelSellOrderResponse): unknown;
+    fromPartial(_: DeepPartial<MsgCancelSellOrderResponse>): MsgCancelSellOrderResponse;
+};
 /** Msg defines the Msg service. */
 export interface Msg {
     SendCreatePair(request: MsgSendCreatePair): Promise<MsgSendCreatePairResponse>;
     SendSellOrder(request: MsgSendSellOrder): Promise<MsgSendSellOrderResponse>;
-    /** this line is used by starport scaffolding # proto/tx/rpc */
     SendBuyOrder(request: MsgSendBuyOrder): Promise<MsgSendBuyOrderResponse>;
+    /** this line is used by starport scaffolding # proto/tx/rpc */
+    CancelSellOrder(request: MsgCancelSellOrder): Promise<MsgCancelSellOrderResponse>;
 }
 export declare class MsgClientImpl implements Msg {
     private readonly rpc;
@@ -89,6 +114,7 @@ export declare class MsgClientImpl implements Msg {
     SendCreatePair(request: MsgSendCreatePair): Promise<MsgSendCreatePairResponse>;
     SendSellOrder(request: MsgSendSellOrder): Promise<MsgSendSellOrderResponse>;
     SendBuyOrder(request: MsgSendBuyOrder): Promise<MsgSendBuyOrderResponse>;
+    CancelSellOrder(request: MsgCancelSellOrder): Promise<MsgCancelSellOrderResponse>;
 }
 interface Rpc {
     request(service: string, method: string, data: Uint8Array): Promise<Uint8Array>;
