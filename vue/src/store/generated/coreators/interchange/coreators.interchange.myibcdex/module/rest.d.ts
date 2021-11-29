@@ -3,6 +3,7 @@ export interface MyibcdexBuyOrderBook {
     amountDenom?: string;
     priceDenom?: string;
 }
+export declare type MyibcdexMsgCancelBuyOrderResponse = object;
 export declare type MyibcdexMsgCancelSellOrderResponse = object;
 export declare type MyibcdexMsgSendBuyOrderResponse = object;
 export declare type MyibcdexMsgSendCreatePairResponse = object;

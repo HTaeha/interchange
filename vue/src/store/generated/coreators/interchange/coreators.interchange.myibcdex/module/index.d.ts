@@ -3,8 +3,9 @@ import { OfflineSigner, EncodeObject } from "@cosmjs/proto-signing";
 import { Api } from "./rest";
 import { MsgSendSellOrder } from "./types/myibcdex/tx";
 import { MsgSendCreatePair } from "./types/myibcdex/tx";
-import { MsgSendBuyOrder } from "./types/myibcdex/tx";
 import { MsgCancelSellOrder } from "./types/myibcdex/tx";
+import { MsgCancelBuyOrder } from "./types/myibcdex/tx";
+import { MsgSendBuyOrder } from "./types/myibcdex/tx";
 export declare const MissingWalletError: Error;
 interface TxClientOptions {
     addr: string;
@@ -17,8 +18,9 @@ declare const txClient: (wallet: OfflineSigner, { addr: addr }?: TxClientOptions
     signAndBroadcast: (msgs: EncodeObject[], { fee, memo }?: SignAndBroadcastOptions) => Promise<import("@cosmjs/stargate").BroadcastTxResponse>;
     msgSendSellOrder: (data: MsgSendSellOrder) => EncodeObject;
     msgSendCreatePair: (data: MsgSendCreatePair) => EncodeObject;
-    msgSendBuyOrder: (data: MsgSendBuyOrder) => EncodeObject;
     msgCancelSellOrder: (data: MsgCancelSellOrder) => EncodeObject;
+    msgCancelBuyOrder: (data: MsgCancelBuyOrder) => EncodeObject;
+    msgSendBuyOrder: (data: MsgSendBuyOrder) => EncodeObject;
 }>;
 interface QueryClientOptions {
     addr: string;
