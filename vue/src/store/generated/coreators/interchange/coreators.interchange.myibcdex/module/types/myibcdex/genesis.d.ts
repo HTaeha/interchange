@@ -1,13 +1,15 @@
 import { SellOrderBook } from "../myibcdex/sell_order_book";
 import { BuyOrderBook } from "../myibcdex/buy_order_book";
+import { DenomTrace } from "../myibcdex/denom_trace";
 import { Writer, Reader } from "protobufjs/minimal";
 export declare const protobufPackage = "coreators.interchange.myibcdex";
 /** GenesisState defines the myibcdex module's genesis state. */
 export interface GenesisState {
     portId: string;
     sellOrderBookList: SellOrderBook[];
-    /** this line is used by starport scaffolding # genesis/proto/state */
     buyOrderBookList: BuyOrderBook[];
+    /** this line is used by starport scaffolding # genesis/proto/state */
+    denomTraceList: DenomTrace[];
 }
 export declare const GenesisState: {
     encode(message: GenesisState, writer?: Writer): Writer;

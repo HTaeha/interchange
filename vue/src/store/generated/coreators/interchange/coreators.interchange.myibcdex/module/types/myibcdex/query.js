@@ -3,6 +3,7 @@ import { Reader, Writer } from "protobufjs/minimal";
 import { SellOrderBook } from "../myibcdex/sell_order_book";
 import { PageRequest, PageResponse, } from "../cosmos/base/query/v1beta1/pagination";
 import { BuyOrderBook } from "../myibcdex/buy_order_book";
+import { DenomTrace } from "../myibcdex/denom_trace";
 export const protobufPackage = "coreators.interchange.myibcdex";
 const baseQueryGetSellOrderBookRequest = { index: "" };
 export const QueryGetSellOrderBookRequest = {
@@ -528,6 +529,268 @@ export const QueryAllBuyOrderBookResponse = {
         return message;
     },
 };
+const baseQueryGetDenomTraceRequest = { index: "" };
+export const QueryGetDenomTraceRequest = {
+    encode(message, writer = Writer.create()) {
+        if (message.index !== "") {
+            writer.uint32(10).string(message.index);
+        }
+        return writer;
+    },
+    decode(input, length) {
+        const reader = input instanceof Uint8Array ? new Reader(input) : input;
+        let end = length === undefined ? reader.len : reader.pos + length;
+        const message = {
+            ...baseQueryGetDenomTraceRequest,
+        };
+        while (reader.pos < end) {
+            const tag = reader.uint32();
+            switch (tag >>> 3) {
+                case 1:
+                    message.index = reader.string();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+            }
+        }
+        return message;
+    },
+    fromJSON(object) {
+        const message = {
+            ...baseQueryGetDenomTraceRequest,
+        };
+        if (object.index !== undefined && object.index !== null) {
+            message.index = String(object.index);
+        }
+        else {
+            message.index = "";
+        }
+        return message;
+    },
+    toJSON(message) {
+        const obj = {};
+        message.index !== undefined && (obj.index = message.index);
+        return obj;
+    },
+    fromPartial(object) {
+        const message = {
+            ...baseQueryGetDenomTraceRequest,
+        };
+        if (object.index !== undefined && object.index !== null) {
+            message.index = object.index;
+        }
+        else {
+            message.index = "";
+        }
+        return message;
+    },
+};
+const baseQueryGetDenomTraceResponse = {};
+export const QueryGetDenomTraceResponse = {
+    encode(message, writer = Writer.create()) {
+        if (message.denomTrace !== undefined) {
+            DenomTrace.encode(message.denomTrace, writer.uint32(10).fork()).ldelim();
+        }
+        return writer;
+    },
+    decode(input, length) {
+        const reader = input instanceof Uint8Array ? new Reader(input) : input;
+        let end = length === undefined ? reader.len : reader.pos + length;
+        const message = {
+            ...baseQueryGetDenomTraceResponse,
+        };
+        while (reader.pos < end) {
+            const tag = reader.uint32();
+            switch (tag >>> 3) {
+                case 1:
+                    message.denomTrace = DenomTrace.decode(reader, reader.uint32());
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+            }
+        }
+        return message;
+    },
+    fromJSON(object) {
+        const message = {
+            ...baseQueryGetDenomTraceResponse,
+        };
+        if (object.denomTrace !== undefined && object.denomTrace !== null) {
+            message.denomTrace = DenomTrace.fromJSON(object.denomTrace);
+        }
+        else {
+            message.denomTrace = undefined;
+        }
+        return message;
+    },
+    toJSON(message) {
+        const obj = {};
+        message.denomTrace !== undefined &&
+            (obj.denomTrace = message.denomTrace
+                ? DenomTrace.toJSON(message.denomTrace)
+                : undefined);
+        return obj;
+    },
+    fromPartial(object) {
+        const message = {
+            ...baseQueryGetDenomTraceResponse,
+        };
+        if (object.denomTrace !== undefined && object.denomTrace !== null) {
+            message.denomTrace = DenomTrace.fromPartial(object.denomTrace);
+        }
+        else {
+            message.denomTrace = undefined;
+        }
+        return message;
+    },
+};
+const baseQueryAllDenomTraceRequest = {};
+export const QueryAllDenomTraceRequest = {
+    encode(message, writer = Writer.create()) {
+        if (message.pagination !== undefined) {
+            PageRequest.encode(message.pagination, writer.uint32(10).fork()).ldelim();
+        }
+        return writer;
+    },
+    decode(input, length) {
+        const reader = input instanceof Uint8Array ? new Reader(input) : input;
+        let end = length === undefined ? reader.len : reader.pos + length;
+        const message = {
+            ...baseQueryAllDenomTraceRequest,
+        };
+        while (reader.pos < end) {
+            const tag = reader.uint32();
+            switch (tag >>> 3) {
+                case 1:
+                    message.pagination = PageRequest.decode(reader, reader.uint32());
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+            }
+        }
+        return message;
+    },
+    fromJSON(object) {
+        const message = {
+            ...baseQueryAllDenomTraceRequest,
+        };
+        if (object.pagination !== undefined && object.pagination !== null) {
+            message.pagination = PageRequest.fromJSON(object.pagination);
+        }
+        else {
+            message.pagination = undefined;
+        }
+        return message;
+    },
+    toJSON(message) {
+        const obj = {};
+        message.pagination !== undefined &&
+            (obj.pagination = message.pagination
+                ? PageRequest.toJSON(message.pagination)
+                : undefined);
+        return obj;
+    },
+    fromPartial(object) {
+        const message = {
+            ...baseQueryAllDenomTraceRequest,
+        };
+        if (object.pagination !== undefined && object.pagination !== null) {
+            message.pagination = PageRequest.fromPartial(object.pagination);
+        }
+        else {
+            message.pagination = undefined;
+        }
+        return message;
+    },
+};
+const baseQueryAllDenomTraceResponse = {};
+export const QueryAllDenomTraceResponse = {
+    encode(message, writer = Writer.create()) {
+        for (const v of message.denomTrace) {
+            DenomTrace.encode(v, writer.uint32(10).fork()).ldelim();
+        }
+        if (message.pagination !== undefined) {
+            PageResponse.encode(message.pagination, writer.uint32(18).fork()).ldelim();
+        }
+        return writer;
+    },
+    decode(input, length) {
+        const reader = input instanceof Uint8Array ? new Reader(input) : input;
+        let end = length === undefined ? reader.len : reader.pos + length;
+        const message = {
+            ...baseQueryAllDenomTraceResponse,
+        };
+        message.denomTrace = [];
+        while (reader.pos < end) {
+            const tag = reader.uint32();
+            switch (tag >>> 3) {
+                case 1:
+                    message.denomTrace.push(DenomTrace.decode(reader, reader.uint32()));
+                    break;
+                case 2:
+                    message.pagination = PageResponse.decode(reader, reader.uint32());
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+            }
+        }
+        return message;
+    },
+    fromJSON(object) {
+        const message = {
+            ...baseQueryAllDenomTraceResponse,
+        };
+        message.denomTrace = [];
+        if (object.denomTrace !== undefined && object.denomTrace !== null) {
+            for (const e of object.denomTrace) {
+                message.denomTrace.push(DenomTrace.fromJSON(e));
+            }
+        }
+        if (object.pagination !== undefined && object.pagination !== null) {
+            message.pagination = PageResponse.fromJSON(object.pagination);
+        }
+        else {
+            message.pagination = undefined;
+        }
+        return message;
+    },
+    toJSON(message) {
+        const obj = {};
+        if (message.denomTrace) {
+            obj.denomTrace = message.denomTrace.map((e) => e ? DenomTrace.toJSON(e) : undefined);
+        }
+        else {
+            obj.denomTrace = [];
+        }
+        message.pagination !== undefined &&
+            (obj.pagination = message.pagination
+                ? PageResponse.toJSON(message.pagination)
+                : undefined);
+        return obj;
+    },
+    fromPartial(object) {
+        const message = {
+            ...baseQueryAllDenomTraceResponse,
+        };
+        message.denomTrace = [];
+        if (object.denomTrace !== undefined && object.denomTrace !== null) {
+            for (const e of object.denomTrace) {
+                message.denomTrace.push(DenomTrace.fromPartial(e));
+            }
+        }
+        if (object.pagination !== undefined && object.pagination !== null) {
+            message.pagination = PageResponse.fromPartial(object.pagination);
+        }
+        else {
+            message.pagination = undefined;
+        }
+        return message;
+    },
+};
 export class QueryClientImpl {
     constructor(rpc) {
         this.rpc = rpc;
@@ -551,5 +814,15 @@ export class QueryClientImpl {
         const data = QueryAllBuyOrderBookRequest.encode(request).finish();
         const promise = this.rpc.request("coreators.interchange.myibcdex.Query", "BuyOrderBookAll", data);
         return promise.then((data) => QueryAllBuyOrderBookResponse.decode(new Reader(data)));
+    }
+    DenomTrace(request) {
+        const data = QueryGetDenomTraceRequest.encode(request).finish();
+        const promise = this.rpc.request("coreators.interchange.myibcdex.Query", "DenomTrace", data);
+        return promise.then((data) => QueryGetDenomTraceResponse.decode(new Reader(data)));
+    }
+    DenomTraceAll(request) {
+        const data = QueryAllDenomTraceRequest.encode(request).finish();
+        const promise = this.rpc.request("coreators.interchange.myibcdex.Query", "DenomTraceAll", data);
+        return promise.then((data) => QueryAllDenomTraceResponse.decode(new Reader(data)));
     }
 }

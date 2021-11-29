@@ -1,0 +1,15 @@
+syntax = "proto3";
+package coreators.interchange.myibcdex;
+
+option go_package = "github.com/coreators/interchange/x/myibcdex/types";
+
+
+
+message DenomTrace {
+  string index = 1; 
+  string port = 2; 
+  string channel = 3; 
+  string origin = 4; 
+  
+}
+

@@ -1,4 +1,5 @@
 import { BuyOrderBook } from "./module/types/myibcdex/buy_order_book";
+import { DenomTrace } from "./module/types/myibcdex/denom_trace";
 import { MyibcdexPacketData } from "./module/types/myibcdex/packet";
 import { NoData } from "./module/types/myibcdex/packet";
 import { CreatePairPacketData } from "./module/types/myibcdex/packet";
@@ -8,6 +9,6 @@ import { SellOrderPacketAck } from "./module/types/myibcdex/packet";
 import { BuyOrderPacketData } from "./module/types/myibcdex/packet";
 import { BuyOrderPacketAck } from "./module/types/myibcdex/packet";
 import { SellOrderBook } from "./module/types/myibcdex/sell_order_book";
-export { BuyOrderBook, MyibcdexPacketData, NoData, CreatePairPacketData, CreatePairPacketAck, SellOrderPacketData, SellOrderPacketAck, BuyOrderPacketData, BuyOrderPacketAck, SellOrderBook };
+export { BuyOrderBook, DenomTrace, MyibcdexPacketData, NoData, CreatePairPacketData, CreatePairPacketAck, SellOrderPacketData, SellOrderPacketAck, BuyOrderPacketData, BuyOrderPacketAck, SellOrderBook };
 declare const _default;
 export default _default;

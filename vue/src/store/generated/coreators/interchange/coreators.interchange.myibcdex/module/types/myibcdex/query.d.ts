@@ -2,6 +2,7 @@ import { Reader, Writer } from "protobufjs/minimal";
 import { SellOrderBook } from "../myibcdex/sell_order_book";
 import { PageRequest, PageResponse } from "../cosmos/base/query/v1beta1/pagination";
 import { BuyOrderBook } from "../myibcdex/buy_order_book";
+import { DenomTrace } from "../myibcdex/denom_trace";
 export declare const protobufPackage = "coreators.interchange.myibcdex";
 export interface QueryGetSellOrderBookRequest {
     index: string;
@@ -27,6 +28,19 @@ export interface QueryAllBuyOrderBookRequest {
 }
 export interface QueryAllBuyOrderBookResponse {
     buyOrderBook: BuyOrderBook[];
+    pagination: PageResponse | undefined;
+}
+export interface QueryGetDenomTraceRequest {
+    index: string;
+}
+export interface QueryGetDenomTraceResponse {
+    denomTrace: DenomTrace | undefined;
+}
+export interface QueryAllDenomTraceRequest {
+    pagination: PageRequest | undefined;
+}
+export interface QueryAllDenomTraceResponse {
+    denomTrace: DenomTrace[];
     pagination: PageResponse | undefined;
 }
 export declare const QueryGetSellOrderBookRequest: {
@@ -85,6 +99,34 @@ export declare const QueryAllBuyOrderBookResponse: {
     toJSON(message: QueryAllBuyOrderBookResponse): unknown;
     fromPartial(object: DeepPartial<QueryAllBuyOrderBookResponse>): QueryAllBuyOrderBookResponse;
 };
+export declare const QueryGetDenomTraceRequest: {
+    encode(message: QueryGetDenomTraceRequest, writer?: Writer): Writer;
+    decode(input: Reader | Uint8Array, length?: number): QueryGetDenomTraceRequest;
+    fromJSON(object: any): QueryGetDenomTraceRequest;
+    toJSON(message: QueryGetDenomTraceRequest): unknown;
+    fromPartial(object: DeepPartial<QueryGetDenomTraceRequest>): QueryGetDenomTraceRequest;
+};
+export declare const QueryGetDenomTraceResponse: {
+    encode(message: QueryGetDenomTraceResponse, writer?: Writer): Writer;
+    decode(input: Reader | Uint8Array, length?: number): QueryGetDenomTraceResponse;
+    fromJSON(object: any): QueryGetDenomTraceResponse;
+    toJSON(message: QueryGetDenomTraceResponse): unknown;
+    fromPartial(object: DeepPartial<QueryGetDenomTraceResponse>): QueryGetDenomTraceResponse;
+};
+export declare const QueryAllDenomTraceRequest: {
+    encode(message: QueryAllDenomTraceRequest, writer?: Writer): Writer;
+    decode(input: Reader | Uint8Array, length?: number): QueryAllDenomTraceRequest;
+    fromJSON(object: any): QueryAllDenomTraceRequest;
+    toJSON(message: QueryAllDenomTraceRequest): unknown;
+    fromPartial(object: DeepPartial<QueryAllDenomTraceRequest>): QueryAllDenomTraceRequest;
+};
+export declare const QueryAllDenomTraceResponse: {
+    encode(message: QueryAllDenomTraceResponse, writer?: Writer): Writer;
+    decode(input: Reader | Uint8Array, length?: number): QueryAllDenomTraceResponse;
+    fromJSON(object: any): QueryAllDenomTraceResponse;
+    toJSON(message: QueryAllDenomTraceResponse): unknown;
+    fromPartial(object: DeepPartial<QueryAllDenomTraceResponse>): QueryAllDenomTraceResponse;
+};
 /** Query defines the gRPC querier service. */
 export interface Query {
     /** Queries a sellOrderBook by index. */
@@ -95,6 +137,10 @@ export interface Query {
     BuyOrderBook(request: QueryGetBuyOrderBookRequest): Promise<QueryGetBuyOrderBookResponse>;
     /** Queries a list of buyOrderBook items. */
     BuyOrderBookAll(request: QueryAllBuyOrderBookRequest): Promise<QueryAllBuyOrderBookResponse>;
+    /** Queries a denomTrace by index. */
+    DenomTrace(request: QueryGetDenomTraceRequest): Promise<QueryGetDenomTraceResponse>;
+    /** Queries a list of denomTrace items. */
+    DenomTraceAll(request: QueryAllDenomTraceRequest): Promise<QueryAllDenomTraceResponse>;
 }
 export declare class QueryClientImpl implements Query {
     private readonly rpc;
@@ -103,6 +149,8 @@ export declare class QueryClientImpl implements Query {
     SellOrderBookAll(request: QueryAllSellOrderBookRequest): Promise<QueryAllSellOrderBookResponse>;
     BuyOrderBook(request: QueryGetBuyOrderBookRequest): Promise<QueryGetBuyOrderBookResponse>;
     BuyOrderBookAll(request: QueryAllBuyOrderBookRequest): Promise<QueryAllBuyOrderBookResponse>;
+    DenomTrace(request: QueryGetDenomTraceRequest): Promise<QueryGetDenomTraceResponse>;
+    DenomTraceAll(request: QueryAllDenomTraceRequest): Promise<QueryAllDenomTraceResponse>;
 }
 interface Rpc {
     request(service: string, method: string, data: Uint8Array): Promise<Uint8Array>;

@@ -15,6 +15,13 @@ export interface MyibcdexBuyOrderBook {
   priceDenom?: string;
 }
 
+export interface MyibcdexDenomTrace {
+  index?: string;
+  port?: string;
+  channel?: string;
+  origin?: string;
+}
+
 export type MyibcdexMsgCancelBuyOrderResponse = object;
 
 export type MyibcdexMsgCancelSellOrderResponse = object;
@@ -27,6 +34,21 @@ export type MyibcdexMsgSendSellOrderResponse = object;
 
 export interface MyibcdexQueryAllBuyOrderBookResponse {
   buyOrderBook?: MyibcdexBuyOrderBook[];
+
+  /**
+   * PageResponse is to be embedded in gRPC response messages where the
+   * corresponding request message has used PageRequest.
+   *
+   *  message SomeResponse {
+   *          repeated Bar results = 1;
+   *          PageResponse page = 2;
+   *  }
+   */
+  pagination?: V1Beta1PageResponse;
+}
+
+export interface MyibcdexQueryAllDenomTraceResponse {
+  denomTrace?: MyibcdexDenomTrace[];
 
   /**
    * PageResponse is to be embedded in gRPC response messages where the
@@ -57,6 +79,10 @@ export interface MyibcdexQueryAllSellOrderBookResponse {
 
 export interface MyibcdexQueryGetBuyOrderBookResponse {
   buyOrderBook?: MyibcdexBuyOrderBook;
+}
+
+export interface MyibcdexQueryGetDenomTraceResponse {
+  denomTrace?: MyibcdexDenomTrace;
 }
 
 export interface MyibcdexQueryGetSellOrderBookResponse {
@@ -372,6 +398,48 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
   queryBuyOrderBook = (index: string, params: RequestParams = {}) =>
     this.request<MyibcdexQueryGetBuyOrderBookResponse, RpcStatus>({
       path: `/coreators/interchange/myibcdex/buyOrderBook/${index}`,
+      method: "GET",
+      format: "json",
+      ...params,
+    });
+
+  /**
+   * No description
+   *
+   * @tags Query
+   * @name QueryDenomTraceAll
+   * @summary Queries a list of denomTrace items.
+   * @request GET:/coreators/interchange/myibcdex/denomTrace
+   */
+  queryDenomTraceAll = (
+    query?: {
+      "pagination.key"?: string;
+      "pagination.offset"?: string;
+      "pagination.limit"?: string;
+      "pagination.countTotal"?: boolean;
+      "pagination.reverse"?: boolean;
+    },
+    params: RequestParams = {},
+  ) =>
+    this.request<MyibcdexQueryAllDenomTraceResponse, RpcStatus>({
+      path: `/coreators/interchange/myibcdex/denomTrace`,
+      method: "GET",
+      query: query,
+      format: "json",
+      ...params,
+    });
+
+  /**
+   * No description
+   *
+   * @tags Query
+   * @name QueryDenomTrace
+   * @summary Queries a denomTrace by index.
+   * @request GET:/coreators/interchange/myibcdex/denomTrace/{index}
+   */
+  queryDenomTrace = (index: string, params: RequestParams = {}) =>
+    this.request<MyibcdexQueryGetDenomTraceResponse, RpcStatus>({
+      path: `/coreators/interchange/myibcdex/denomTrace/${index}`,
       method: "GET",
       format: "json",
       ...params,

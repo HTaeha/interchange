@@ -5,6 +5,7 @@ import "google/api/annotations.proto";
 import "cosmos/base/query/v1beta1/pagination.proto";
 import "myibcdex/sell_order_book.proto";
 import "myibcdex/buy_order_book.proto";
+import "myibcdex/denom_trace.proto";
 // this line is used by starport scaffolding # 1
 import "gogoproto/gogo.proto";
 
@@ -30,6 +31,16 @@ service Query {
 	// Queries a list of buyOrderBook items.
 	rpc BuyOrderBookAll(QueryAllBuyOrderBookRequest) returns (QueryAllBuyOrderBookResponse) {
 		option (google.api.http).get = "/coreators/interchange/myibcdex/buyOrderBook";
+	}
+
+// Queries a denomTrace by index.
+	rpc DenomTrace(QueryGetDenomTraceRequest) returns (QueryGetDenomTraceResponse) {
+		option (google.api.http).get = "/coreators/interchange/myibcdex/denomTrace/{index}";
+	}
+
+	// Queries a list of denomTrace items.
+	rpc DenomTraceAll(QueryAllDenomTraceRequest) returns (QueryAllDenomTraceResponse) {
+		option (google.api.http).get = "/coreators/interchange/myibcdex/denomTrace";
 	}
 
 // this line is used by starport scaffolding # 2
@@ -68,6 +79,24 @@ message QueryAllBuyOrderBookRequest {
 
 message QueryAllBuyOrderBookResponse {
 	repeated BuyOrderBook buyOrderBook = 1 [(gogoproto.nullable) = false];
+	cosmos.base.query.v1beta1.PageResponse pagination = 2;
+}
+
+message QueryGetDenomTraceRequest {
+	  string index = 1;
+
+}
+
+message QueryGetDenomTraceResponse {
+	DenomTrace denomTrace = 1 [(gogoproto.nullable) = false];
+}
+
+message QueryAllDenomTraceRequest {
+	cosmos.base.query.v1beta1.PageRequest pagination = 1;
+}
+
+message QueryAllDenomTraceResponse {
+	repeated DenomTrace denomTrace = 1 [(gogoproto.nullable) = false];
 	cosmos.base.query.v1beta1.PageResponse pagination = 2;
 }
 

@@ -3,6 +3,7 @@ package coreators.interchange.myibcdex;
 
 import "myibcdex/sell_order_book.proto";
 import "myibcdex/buy_order_book.proto";
+import "myibcdex/denom_trace.proto";
 // this line is used by starport scaffolding # genesis/proto/import
 import "gogoproto/gogo.proto";
 
@@ -13,5 +14,6 @@ message GenesisState {
     string port_id = 1;
   repeated SellOrderBook sellOrderBookList = 2 [(gogoproto.nullable) = false];
   repeated BuyOrderBook buyOrderBookList = 3 [(gogoproto.nullable) = false];
+  repeated DenomTrace denomTraceList = 4 [(gogoproto.nullable) = false];
   // this line is used by starport scaffolding # genesis/proto/state
 }
